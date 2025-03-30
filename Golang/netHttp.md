@@ -14,4 +14,11 @@
 
 `http.ListenAndServe("localhost:8080", nil)` - Запускает веб сервер, начиная прослушивать на порту
 
-`http.HandleFunc("/", helloHandler)` - Создаёт хэндлер привязывай к какому-то пути какую-то функцию
+`http.HandleFunc("/", helloHandler)` - Создаёт хэндлер привязывай к какому-то пути какую-то функцию. Если функция, которая привязана к хендлеру требует дополнительный аргумент в таком случае используется анонимная функция для обертки функции хэндлера:
+
+```Go
+http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        helloHandler(w, wizzardStatus)
+    })
+```
+
